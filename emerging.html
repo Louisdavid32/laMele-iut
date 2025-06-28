@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu de Mots Mêlés - Technologies Émergentes</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="wordsearch.js"></script>
+</head>
+<body class="text-white">
+    <div class="container mx-auto px-4 py-6 max-w-7xl">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold neon-text mb-4">
+                <i class="fas fa-rocket"></i> Mots Mêlés - Technologies Émergentes
+            </h1>
+            <div class="visitor-counter inline-block px-6 py-3 rounded-full">
+                <i class="fas fa-users text-green-400"></i>
+                <span class="text-green-300 font-semibold">Visiteurs: </span>
+                <span id="visitorCount" class="text-green-100 font-bold text-lg">0</span>
+            </div>
+            <p class="text-gray-300 text-lg mt-2">Trouvez les 25 mots liés aux technologies émergentes et découvrez le mot mystère !</p>
+        </div>
+
+        <div class="text-center mb-6 no-print">
+            <button id="startBtn" class="btn-primary px-6 py-3 rounded-lg text-white font-semibold mr-4">
+                <i class="fas fa-play"></i> Commencer le Jeu
+            </button>
+            <button id="resetBtn" class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-lg text-white font-semibold mr-4">
+                <i class="fas fa-redo"></i> Recommencer
+            </button>
+            <button id="showSolutionBtn" class="bg-yellow-600 hover:bg-yellow-700 px-6 py-3 rounded-lg text-white font-semibold mr-4">
+                <i class="fas fa-eye"></i> Solution
+            </button>
+            <button id="exportPdfBtn" class="bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg text-white font-semibold">
+                <i class="fas fa-file-pdf"></i> Exporter PDF
+            </button>
+            <a href="index.html" class="bg-gray-600 hover:bg-gray-700 px-6 py-3 rounded-lg text-white font-semibold">
+                <i class="fas fa-home"></i> Retour
+            </a>
+        </div>
+
+        <div class="stats-container text-center mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <i class="fas fa-clock text-blue-400"></i>
+                    <span class="text-blue-300">Temps: </span>
+                    <span id="timer" class="font-bold text-xl">00:00</span>
+                </div>
+                <div>
+                    <i class="fas fa-search text-green-400"></i>
+                    <span class="text-green-300">Trouvés: </span>
+                    <span id="foundWords" class="font-bold text-xl">0</span> / 
+                    <span id="totalWords" class="font-bold text-xl">25</span>
+                </div>
+                <div>
+                    <i class="fas fa-percentage text-yellow-400"></i>
+                    <span class="text-yellow-300">Progression: </span>
+                    <span id="progressPercent" class="font-bold text-xl">0%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-8 items-start justify-center">
+            <div class="flex-shrink-0">
+                <div class="text-center mb-4">
+                    <h2 class="text-2xl font-bold text-blue-300">
+                        <i class="fas fa-th"></i> Grille de Recherche
+                    </h2>
+                </div>
+                <div id="wordGrid" class="grid-container"></div>
+            </div>
+
+            <div class="word-list-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-6 max-w-4xl">
+                <div class="word-list bg-gray-800 p-4 rounded-lg">
+                    <h3 class="category-header text-lg font-bold mb-3 border-b border-yellow-400 pb-2">
+                        <i class="fas fa-coins"></i> Blockchain (5)
+                    </h3>
+                    <div id="blockchain-words" class="grid grid-cols-2 gap-1 text-sm"></div>
+                </div>
+                <div class="word-list bg-gray-800 p-4 rounded-lg">
+                    <h3 class="category-header text-lg font-bold mb-3 border-b border-yellow-400 pb-2">
+                        <i class="fas fa-vr-cardboard"></i> Réalité Virtuelle (5)
+                    </h3>
+                    <div id="vr-words" class="grid grid-cols-2 gap-1 text-sm"></div>
+                </div>
+                <div class="word-list bg-gray-800 p-4 rounded-lg">
+                    <h3 class="category-header text-lg font-bold mb-3 border-b border-yellow-400 pb-2">
+                        <i class="fas fa-atom"></i> Quantique (5)
+                    </h3>
+                    <div id="quantum-words" class="grid grid-cols-2 gap-1 text-sm"></div>
+                </div>
+                <div class="word-list bg-gray-800 p-4 rounded-lg">
+                    <h3 class="category-header text-lg font-bold mb-3 border-b border-yellow-400 pb-2">
+                        <i class="fas fa-drone"></i> Drones (5)
+                    </h3>
+                    <div id="drones-words" class="grid grid-cols-2 gap-1 text-sm"></div>
+                </div>
+                <div class="word-list bg-gray-800 p-4 rounded-lg">
+                    <h3 class="category-header text-lg font-bold mb-3 border-b border-yellow-400 pb-2">
+                        <i class="fas fa-microchip"></i> Nanotechnologie (5)
+                    </h3>
+                    <div id="nanotech-words" class="grid grid-cols-2 gap-1 text-sm"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="mysteryWordSection" class="mystery-word-section mt-6 text-center">
+            <h2 class="text-2xl font-bold neon-text mb-4">
+                <i class="fas fa-key"></i> Mot Mystère
+            </h2>
+            <p class="text-gray-300 mb-4">Vous avez trouvé tous les mots ! Entrez le mot mystère (25 lettres) formé par la première lettre de chaque mot dans l'ordre des sous-thèmes.</p>
+            <input id="mysteryWordInput" type="text" maxlength="25" class="bg-gray-700 text-white p-2 rounded-lg w-64" placeholder="Entrez le mot mystère">
+            <button id="submitMysteryWord" class="btn-primary px-4 py-2 rounded-lg text-white font-semibold mt-4">
+                <i class="fas fa-check"></i> Valider
+            </button>
+            <p id="mysteryWordFeedback" class="text-green-400 mt-2"></p>
+        </div>
+    </div>
+
+    <script>
+        const themeConfig = {
+            words: {
+                blockchain: ['BLOCKCHAIN', 'CRYPTO', 'LEDGER', 'SMARTCONTRACT', 'TOKEN'],
+                vr: ['VIRTUAL', 'AUGMENTED', 'METAVERSE', 'HEADSET', 'HAPTIC'],
+                quantum: ['QUANTUM', 'QUBIT', 'ENTANGLEMENT', 'SUPERPOSITION', 'GATE'],
+                drones: ['DRONE', 'AUTONOMOUS', 'SENSOR', 'PAYLOAD', 'NAVIGATION'],
+                nanotech: ['NANOTECH', 'MOLECULE', 'NANOBOT', 'MATERIAL', 'SCALE']
+            },
+            visitorKey: 'techWordSearchVisitors_emerging',
+            pdfName: 'mots-meles-emerging.pdf',
+            themeName: 'Technologies Émergentes'
+        };
+        initializeGame(themeConfig);
+    </script>
+</body>
+</html>

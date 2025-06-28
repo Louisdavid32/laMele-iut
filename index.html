@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu de Mots Mêlés - Technologie</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: #1f2937;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            overflow-x: hidden;
+        }
+        .neon-text {
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.8), 0 0 20px rgba(59, 130, 246, 0.6);
+        }
+        .theme-card {
+            background: rgba(15, 23, 42, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        .theme-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            filter: blur(25px);
+            z-index: -1;
+            animation: drift linear infinite;
+        }
+        @keyframes drift {
+            from {
+                transform: translateX(-100vw);
+            }
+            to {
+                transform: translateX(100vw);
+            }
+        }
+        .aws-text, .cloud-text, .saas-text {
+            position: absolute;
+            top: 50%;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            z-index: 0;
+            font-family: 'Montserrat', 'Segoe UI', sans-serif;
+            animation: drift-with-pulse linear infinite;
+        }
+        .aws-text {
+            font-size: 6rem;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 50s;
+        }
+        .cloud-text {
+            font-size: 4rem;
+            top: 30%;
+            left: 30%;
+            animation-duration: 45s;
+        }
+        .saas-text {
+            font-size: 3rem;
+            top: 70%;
+            left: 70%;
+            animation-duration: 55s;
+        }
+        @keyframes drift-with-pulse {
+            0% {
+                transform: translateX(-100vw) scale(1);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateX(0) scale(1.05);
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateX(100vw) scale(1);
+                opacity: 0.7;
+            }
+        }
+        .douala-footer {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.9), rgba(0, 0, 0, 0.8));
+            padding: 30px 20px;
+            margin-top: 40px;
+            border-top: 2px solid #ff9900;
+            position: relative;
+            text-align: center;
+        }
+        .douala-footer h2 {
+            color: #ff9900;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .douala-footer p {
+            color: #e0e0e0;
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1rem;
+        }
+        .douala-footer .laptop-icon {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            color: #00cc00;
+            font-size: 2rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <div class="aws-text">AWS</div>
+    <div class="cloud-text">Cloud</div>
+    <div class="saas-text">SaaS</div>
+    <div class="container mx-auto px-4 py-6 max-w-7xl relative">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold neon-text mb-4">
+                <i class="fas fa-microchip"></i> Mots Mêlés Technologie
+            </h1>
+            <p class="text-gray-300 text-lg">Choisissez un thème pour commencer !</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative">
+            <a href="programming.html" class="theme-card">
+                <h2 class="text-2xl font-bold text-blue-400 mb-2"><i class="fas fa-code"></i> Programmation</h2>
+                <p class="text-gray-300">Trouvez 25 mots liés au codage et au développement logiciel.</p>
+            </a>
+            <a href="ai.html" class="theme-card">
+                <h2 class="text-2xl font-bold text-purple-400 mb-2"><i class="fas fa-brain"></i> IA & Data</h2>
+                <p class="text-gray-300">Explorez les termes de l'intelligence artificielle et des données.</p>
+            </a>
+            <a href="security.html" class="theme-card">
+                <h2 class="text-2xl font-bold text-red-400 mb-2"><i class="fas fa-shield-alt"></i> Sécurité</h2>
+                <p class="text-gray-300">Découvrez les mots liés à la cybersécurité.</p>
+            </a>
+            <a href="infrastructure.html" class="theme-card">
+                <h2 class="text-2xl font-bold text-green-400 mb-2"><i class="fas fa-server"></i> Infrastructure</h2>
+                <p class="text-gray-300">Trouvez les termes liés au matériel et aux systèmes.</p>
+            </a>
+            <a href="emerging.html" class="theme-card">
+                <h2 class="text-2xl font-bold text-yellow-400 mb-2"><i class="fas fa-rocket"></i> Émergentes</h2>
+                <p class="text-gray-300">Explorez les technologies du futur.</p>
+            </a>
+            <a href="network.html" class="theme-card">
+                <h2 class="text-2xl font-bold text-cyan-400 mb-2"><i class="fas fa-network-wired"></i> Réseaux</h2>
+                <p class="text-gray-300">Trouvez les mots liés aux réseaux et à l'internet.</p>
+            </a>
+        </div>
+        <div class="douala-footer">
+            <h2>IUT de Douala : Former l’avenir du Cloud</h2>
+            <p>À Douala, capitale économique du Cameroun, l’Institut Universitaire de Technologie (IUT) forme la prochaine génération de professionnels du numérique. Grâce à ses filières en Technologies de l’Information et du Numérique, les étudiants explorent le cloud computing, préparant l’avenir technologique de la région.</p>
+            <i class="laptop-icon fas fa-laptop"></i>
+        </div>
+    </div>
+
+    <script>
+        // Generate clouds
+        function createClouds() {
+            const container = document.querySelector('body');
+            for (let i = 0; i < 12; i++) {
+                const cloud = document.createElement('div');
+                cloud.className = 'cloud';
+                const size = Math.random() * 100 + 50;
+                const top = Math.random() * 80 + 10;
+                const duration = Math.random() * 20 + 40;
+                cloud.style.width = `${size}px`;
+                cloud.style.height = `${size / 2}px`;
+                cloud.style.top = `${top}vh`;
+                cloud.style.left = `${Math.random() * 100}vw`;
+                cloud.style.animationDuration = `${duration}s`;
+                cloud.style.animationDelay = `${Math.random() * -duration}s`;
+                container.appendChild(cloud);
+            }
+        }
+
+        // Initialize clouds on page load
+        window.addEventListener('load', createClouds);
+    </script>
+</body>
+</html>
